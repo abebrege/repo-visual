@@ -87,7 +87,7 @@ Return the JSON DAG structure representing the architecture of this project.`;
 
   const response = await client.messages.create({
     model: "claude-opus-4-6",
-    max_tokens: 8192,
+    max_tokens: 16384,
     messages: [
       {
         role: "user",
@@ -113,10 +113,33 @@ Return the JSON DAG structure representing the architecture of this project.`;
 
   // Extract JSON from response, handling possible markdown wrapping
   let jsonStr = textBlock.text.trim();
-  const jsonMatch = jsonStr.match(/```(?:json)?\s*([\s\S]*?)```/);
-  if (jsonMatch) {
+  // Strip opening ```json if present (handles both complete and truncated responses)
+  const openFence = jsonStr.match(/^```(?:json)?\s*/);
+  if (openFence) {
+    jsonStr = jsonStr.slice(openFence[0].length);
+    // Strip closing fence if present
+    jsonStr = jsonStr.replace(/\s*```\s*$/, "");
     console.log("[analyze] Stripped markdown code block wrapper");
-    jsonStr = jsonMatch[1].trim();
+  }
+
+  // If response was truncated, try to repair the JSON
+  if (response.stop_reason === "max_tokens") {
+    console.warn("[analyze] Response was truncated (max_tokens). Attempting JSON repair...");
+    // Close any open strings, arrays, and objects
+    // Remove trailing incomplete key-value or array element
+    jsonStr = jsonStr.replace(/,\s*"[^"]*$/, "");
+    jsonStr = jsonStr.replace(/,\s*$/, "");
+    // Count open/close braces and brackets to balance
+    let openBraces = 0, openBrackets = 0;
+    for (const ch of jsonStr) {
+      if (ch === "{") openBraces++;
+      else if (ch === "}") openBraces--;
+      else if (ch === "[") openBrackets++;
+      else if (ch === "]") openBrackets--;
+    }
+    jsonStr += "]".repeat(Math.max(0, openBrackets));
+    jsonStr += "}".repeat(Math.max(0, openBraces));
+    console.log(`[analyze] Repaired JSON: added ${Math.max(0, openBrackets)} ] and ${Math.max(0, openBraces)} }`);
   }
 
   let parsed: DagResult;
