@@ -1,0 +1,306 @@
+{
+  "name": "cryptobom forge",
+  "repoUrl": "https://github.com/Santandersecurityresearch/cryptobom-forge.git",
+  "dag": {
+    "nodes": [
+      {
+        "id": "cli",
+        "label": "CLI Interface",
+        "category": "frontend",
+        "description": "Command-line interface entry point for cryptobom-forge, handles user interaction and command dispatch",
+        "files": [
+          "cbom/cli/__init__.py",
+          "cbom/cli/cli.py"
+        ]
+      },
+      {
+        "id": "cryptocheck",
+        "label": "Crypto Check Engine",
+        "category": "backend",
+        "description": "Core engine for validating cryptographic components against rules, including SARIF parsing and validation logic",
+        "files": [
+          "cbom/cryptocheck/__init__.py",
+          "cbom/cryptocheck/cryptocheck.py",
+          "cbom/cryptocheck/sarif.py",
+          "cbom/cryptocheck/validators.py"
+        ]
+      },
+      {
+        "id": "parser",
+        "label": "CBOM Parser",
+        "category": "internal",
+        "description": "Parses SARIF/CodeQL results into cryptographic BOM components: algorithms, certificates, and related crypto material",
+        "files": [
+          "cbom/parser/__init__.py",
+          "cbom/parser/algorithm.py",
+          "cbom/parser/certificate.py",
+          "cbom/parser/related_crypto_material.py",
+          "cbom/parser/utils.py"
+        ]
+      },
+      {
+        "id": "lib_utils",
+        "label": "Library Utilities",
+        "category": "library",
+        "description": "Shared utility functions and library lookup logic used across the codebase",
+        "files": [
+          "cbom/lib_utils.py",
+          "cbom/__init__.py"
+        ]
+      },
+      {
+        "id": "resources",
+        "label": "Resources & Rules",
+        "category": "data",
+        "description": "Static resource files including cryptocheck rules, JSON schema, and cryptographic library definitions",
+        "files": [
+          "cbom/resources/cryptocheck_rules.yml",
+          "cbom/resources/cryptocheck_schema.json",
+          "cbom/resources/library.yml"
+        ]
+      },
+      {
+        "id": "unit_tests",
+        "label": "Unit Tests",
+        "category": "testing",
+        "description": "Unit tests for parser components (algorithm, certificate, related crypto material, utils)",
+        "files": [
+          "tests/__init__.py",
+          "tests/unit_tests/__init__.py",
+          "tests/unit_tests/conftest.py",
+          "tests/unit_tests/test_algorithm.py",
+          "tests/unit_tests/test_certificate.py",
+          "tests/unit_tests/test_related_crypto_material.py",
+          "tests/unit_tests/test_utils.py"
+        ]
+      },
+      {
+        "id": "unit_test_data",
+        "label": "Unit Test Data",
+        "category": "testing",
+        "description": "SARIF test fixtures for unit tests covering various cryptographic algorithms",
+        "files": [
+          "tests/unit_tests/data/codeql/aes.sarif",
+          "tests/unit_tests/data/codeql/dsa.sarif",
+          "tests/unit_tests/data/codeql/fernet.sarif",
+          "tests/unit_tests/data/codeql/rsa.sarif"
+        ]
+      },
+      {
+        "id": "integration_tests",
+        "label": "Integration Tests",
+        "category": "testing",
+        "description": "Integration tests validating end-to-end CBOM generation and processing",
+        "files": [
+          "tests/integration_tests/__init__.py",
+          "tests/integration_tests/test_cbom.py"
+        ]
+      },
+      {
+        "id": "integration_test_data",
+        "label": "Integration Test Data",
+        "category": "testing",
+        "description": "CBOM and SARIF fixtures for integration testing including full and partial results",
+        "files": [
+          "tests/integration_tests/data/cbom/cbom_exclusion_pattern.json",
+          "tests/integration_tests/data/cbom/cbom_full.json",
+          "tests/integration_tests/data/codeql/full.sarif",
+          "tests/integration_tests/data/codeql/partial_results/asymmetric_algorithms.sarif",
+          "tests/integration_tests/data/codeql/partial_results/symmetric_algorithms.sarif"
+        ]
+      },
+      {
+        "id": "build_config",
+        "label": "Build & Packaging",
+        "category": "infrastructure",
+        "description": "Python project configuration, dependency management, and packaging setup",
+        "files": [
+          "pyproject.toml",
+          "requirements.txt",
+          "MANIFEST.in",
+          "tox.ini"
+        ]
+      },
+      {
+        "id": "ci_cd",
+        "label": "CI/CD Pipelines",
+        "category": "infrastructure",
+        "description": "GitHub Actions workflows for pull request checks and release automation",
+        "files": [
+          ".github/workflows/pull_request.yml",
+          ".github/workflows/release.yml"
+        ]
+      },
+      {
+        "id": "docs",
+        "label": "Documentation",
+        "category": "docs",
+        "description": "Project documentation including README, changelog, security policy, and code of conduct",
+        "files": [
+          "README.md",
+          "CHANGELOG.rst",
+          "CODE_OF_CONDUCT.md",
+          "LICENSE",
+          "SECURITY.md",
+          ".gitignore",
+          ".gitchangelog.rc"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "cli",
+        "target": "parser",
+        "label": "invokes parsing"
+      },
+      {
+        "source": "cli",
+        "target": "cryptocheck",
+        "label": "invokes crypto checks"
+      },
+      {
+        "source": "cli",
+        "target": "lib_utils",
+        "label": "uses utilities"
+      },
+      {
+        "source": "cryptocheck",
+        "target": "resources",
+        "label": "loads rules & schema"
+      },
+      {
+        "source": "cryptocheck",
+        "target": "lib_utils",
+        "label": "uses utilities"
+      },
+      {
+        "source": "parser",
+        "target": "lib_utils",
+        "label": "uses library lookups"
+      },
+      {
+        "source": "parser",
+        "target": "resources",
+        "label": "loads library definitions"
+      },
+      {
+        "source": "unit_tests",
+        "target": "parser",
+        "label": "tests"
+      },
+      {
+        "source": "unit_tests",
+        "target": "unit_test_data",
+        "label": "loads fixtures"
+      },
+      {
+        "source": "integration_tests",
+        "target": "cli",
+        "label": "tests end-to-end"
+      },
+      {
+        "source": "integration_tests",
+        "target": "parser",
+        "label": "tests parsing"
+      },
+      {
+        "source": "integration_tests",
+        "target": "integration_test_data",
+        "label": "loads fixtures"
+      },
+      {
+        "source": "ci_cd",
+        "target": "build_config",
+        "label": "uses build config"
+      },
+      {
+        "source": "ci_cd",
+        "target": "unit_tests",
+        "label": "runs tests"
+      },
+      {
+        "source": "ci_cd",
+        "target": "integration_tests",
+        "label": "runs tests"
+      }
+    ],
+    "categories": [
+      {
+        "name": "frontend",
+        "color": "#4A90D9",
+        "description": "User-facing CLI interface and command handling"
+      },
+      {
+        "name": "backend",
+        "color": "#E06C75",
+        "description": "Core processing engine for cryptographic validation"
+      },
+      {
+        "name": "internal",
+        "color": "#C678DD",
+        "description": "Internal parsing and data transformation logic"
+      },
+      {
+        "name": "library",
+        "color": "#61AFEF",
+        "description": "Shared utility modules and helper functions"
+      },
+      {
+        "name": "data",
+        "color": "#E5C07B",
+        "description": "Static resources, rules, schemas, and configuration data"
+      },
+      {
+        "name": "testing",
+        "color": "#98C379",
+        "description": "Test suites, fixtures, and test data"
+      },
+      {
+        "name": "infrastructure",
+        "color": "#D19A66",
+        "description": "Build configuration, CI/CD, and deployment"
+      },
+      {
+        "name": "docs",
+        "color": "#ABB2BF",
+        "description": "Project documentation and metadata"
+      }
+    ],
+    "sections": [
+      {
+        "name": "Core Application",
+        "nodeIds": [
+          "cli",
+          "cryptocheck",
+          "parser",
+          "lib_utils"
+        ]
+      },
+      {
+        "name": "Static Resources",
+        "nodeIds": [
+          "resources"
+        ]
+      },
+      {
+        "name": "Testing",
+        "nodeIds": [
+          "unit_tests",
+          "unit_test_data",
+          "integration_tests",
+          "integration_test_data"
+        ]
+      },
+      {
+        "name": "Project Infrastructure",
+        "nodeIds": [
+          "build_config",
+          "ci_cd",
+          "docs"
+        ]
+      }
+    ],
+    "summary": "Cryptobom-forge is a Python CLI tool that generates and validates Cryptographic Bills of Materials (CBOMs) from CodeQL SARIF analysis results. The architecture centers around a CLI entry point that orchestrates two main subsystems: a parser module that transforms SARIF output into structured cryptographic components (algorithms, certificates, and related crypto material) using library definition lookups, and a cryptocheck engine that validates the resulting CBOM against configurable rules and schemas. Static YAML/JSON resources define the cryptographic library mappings and validation rules. The project follows standard Python packaging conventions with tox for test orchestration, GitHub Actions for CI/CD, and a clean separation between unit tests (testing individual parser components) and integration tests (validating end-to-end CBOM generation)."
+  },
+  "savedAt": "2026-05-26T01:57:56.277Z"
+}

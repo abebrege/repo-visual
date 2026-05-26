@@ -1,0 +1,275 @@
+{
+  "name": "quantum control machine",
+  "repoUrl": "https://github.com/psg-mit/qcm-artifact.git",
+  "dag": {
+    "nodes": [
+      {
+        "id": "main",
+        "label": "Main Entry Point",
+        "category": "backend",
+        "description": "The main entry point of the QCM tool that orchestrates parsing and interpretation",
+        "files": [
+          "src/main.ml"
+        ]
+      },
+      {
+        "id": "parser",
+        "label": "Parser & Lexer",
+        "category": "backend",
+        "description": "OCaml lexer (ocamllex) and parser (menhir/ocamlyacc) for the QCM language",
+        "files": [
+          "src/lexer.mll",
+          "src/parser.mly"
+        ]
+      },
+      {
+        "id": "ast",
+        "label": "Abstract Syntax Tree",
+        "category": "internal",
+        "description": "AST definition for the QCM quantum circuit language",
+        "files": [
+          "src/lib/ast/ast.ml"
+        ]
+      },
+      {
+        "id": "interp",
+        "label": "Interpreter",
+        "category": "internal",
+        "description": "Interpreter/evaluator for QCM programs operating on quantum circuit representations",
+        "files": [
+          "src/lib/interp/interp.ml",
+          "src/lib/interp/interp.mli"
+        ]
+      },
+      {
+        "id": "symbol",
+        "label": "Symbol Table",
+        "category": "internal",
+        "description": "Symbol management for variable and label resolution",
+        "files": [
+          "src/lib/symbol/symbol.ml",
+          "src/lib/symbol/symbol.mli"
+        ]
+      },
+      {
+        "id": "args",
+        "label": "CLI Arguments",
+        "category": "backend",
+        "description": "Command-line argument parsing and configuration",
+        "files": [
+          "src/lib/args.ml"
+        ]
+      },
+      {
+        "id": "build_system",
+        "label": "Build System",
+        "category": "infrastructure",
+        "description": "Dune build configuration and Makefile for building the OCaml project",
+        "files": [
+          "dune",
+          "dune-project",
+          "src/dune",
+          "src/lib/dune",
+          "Makefile"
+        ]
+      },
+      {
+        "id": "docker",
+        "label": "Docker",
+        "category": "infrastructure",
+        "description": "Docker configuration for reproducible builds and artifact evaluation",
+        "files": [
+          "Dockerfile"
+        ]
+      },
+      {
+        "id": "tests",
+        "label": "Test Programs",
+        "category": "testing",
+        "description": "QCM test programs for quantum circuits including addition, exponentiation, Hadamard, and Majorana",
+        "files": [
+          "test/addition-labels.qcm",
+          "test/addition.qcm",
+          "test/exponentiation-labels.qcm",
+          "test/exponentiation-nosync-labels.qcm",
+          "test/exponentiation-nosync.qcm",
+          "test/exponentiation.qcm",
+          "test/hadamard-labels.qcm",
+          "test/hadamard.qcm",
+          "test/majorana-labels.qcm",
+          "test/majorana.qcm"
+        ]
+      },
+      {
+        "id": "expected_output",
+        "label": "Expected Output",
+        "category": "testing",
+        "description": "Expected output for regression testing of QCM programs",
+        "files": [
+          "expected_output"
+        ]
+      },
+      {
+        "id": "scripts",
+        "label": "Utility Scripts",
+        "category": "infrastructure",
+        "description": "Python utility script for label-to-offset conversion in QCM output",
+        "files": [
+          "label2offset.py"
+        ]
+      },
+      {
+        "id": "qcm_binary",
+        "label": "QCM Binary/Script",
+        "category": "infrastructure",
+        "description": "Wrapper script or pre-built binary for running the QCM tool",
+        "files": [
+          "qcm"
+        ]
+      },
+      {
+        "id": "docs",
+        "label": "Documentation",
+        "category": "docs",
+        "description": "README files and license documentation",
+        "files": [
+          "README.md",
+          "src/README.md",
+          "LICENSE.md",
+          ".gitignore"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "main",
+        "target": "parser",
+        "label": "invokes parsing"
+      },
+      {
+        "source": "main",
+        "target": "interp",
+        "label": "invokes interpretation"
+      },
+      {
+        "source": "main",
+        "target": "args",
+        "label": "reads CLI args"
+      },
+      {
+        "source": "parser",
+        "target": "ast",
+        "label": "produces AST"
+      },
+      {
+        "source": "interp",
+        "target": "ast",
+        "label": "consumes AST"
+      },
+      {
+        "source": "interp",
+        "target": "symbol",
+        "label": "uses symbol table"
+      },
+      {
+        "source": "parser",
+        "target": "symbol",
+        "label": "uses symbols"
+      },
+      {
+        "source": "qcm_binary",
+        "target": "main",
+        "label": "wraps"
+      },
+      {
+        "source": "tests",
+        "target": "qcm_binary",
+        "label": "executed by"
+      },
+      {
+        "source": "expected_output",
+        "target": "tests",
+        "label": "validates"
+      },
+      {
+        "source": "scripts",
+        "target": "qcm_binary",
+        "label": "post-processes output"
+      },
+      {
+        "source": "docker",
+        "target": "build_system",
+        "label": "uses to build"
+      },
+      {
+        "source": "build_system",
+        "target": "main",
+        "label": "compiles"
+      }
+    ],
+    "categories": [
+      {
+        "name": "backend",
+        "color": "#4A90D9",
+        "description": "Core application logic, entry point, and CLI handling"
+      },
+      {
+        "name": "internal",
+        "color": "#7B68EE",
+        "description": "Internal data structures, algorithms, and interpretation engine"
+      },
+      {
+        "name": "infrastructure",
+        "color": "#E8963E",
+        "description": "Build tools, deployment configuration, and utility scripts"
+      },
+      {
+        "name": "testing",
+        "color": "#50C878",
+        "description": "Test programs and expected outputs for validation"
+      },
+      {
+        "name": "docs",
+        "color": "#95A5A6",
+        "description": "Documentation and project metadata"
+      }
+    ],
+    "sections": [
+      {
+        "name": "QCM Compiler/Interpreter Core",
+        "nodeIds": [
+          "main",
+          "parser",
+          "ast",
+          "interp",
+          "symbol",
+          "args"
+        ]
+      },
+      {
+        "name": "Build & Deployment",
+        "nodeIds": [
+          "build_system",
+          "docker",
+          "qcm_binary",
+          "scripts"
+        ]
+      },
+      {
+        "name": "Testing & Validation",
+        "nodeIds": [
+          "tests",
+          "expected_output"
+        ]
+      },
+      {
+        "name": "Documentation",
+        "nodeIds": [
+          "docs"
+        ]
+      }
+    ],
+    "summary": "This repository is a research artifact for QCM (Quantum Circuit Model), implemented as an OCaml-based interpreter/compiler. The architecture follows a classic compiler pipeline: a lexer and parser (built with ocamllex/menhir) produce an AST, which is then evaluated by an interpreter module. A symbol table supports variable and label resolution. The project uses the Dune build system, provides Docker support for reproducible artifact evaluation, and includes a suite of QCM test programs covering quantum operations like addition, exponentiation, Hadamard transforms, and Majorana fermion circuits. A Python utility script assists in post-processing label offsets from the tool's output."
+  },
+  "savedAt": "2026-05-26T01:50:05.243Z"
+}

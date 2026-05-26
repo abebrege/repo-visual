@@ -1,0 +1,364 @@
+{
+  "name": "pcap-parser",
+  "repoUrl": "https://github.com/rusticata/pcap-parser.git",
+  "dag": {
+    "nodes": [
+      {
+        "id": "lib_core",
+        "label": "Core Library",
+        "category": "library",
+        "description": "Main library entry point, re-exports, common types, error handling, endianness, and utility functions",
+        "files": [
+          "src/lib.rs",
+          "src/error.rs",
+          "src/endianness.rs",
+          "src/utils.rs",
+          "src/linktype.rs",
+          "src/blocks.rs"
+        ]
+      },
+      {
+        "id": "traits",
+        "label": "Traits & Abstractions",
+        "category": "library",
+        "description": "Common traits for capture file reading and packet access (PcapReaderIterator, etc.)",
+        "files": [
+          "src/traits.rs",
+          "src/capture.rs"
+        ]
+      },
+      {
+        "id": "pcap_format",
+        "label": "PCAP Format",
+        "category": "internal",
+        "description": "Parser and data structures for the legacy PCAP file format (headers, frames, capture abstraction, reader)",
+        "files": [
+          "src/pcap.rs",
+          "src/pcap/header.rs",
+          "src/pcap/frame.rs",
+          "src/pcap/capture.rs",
+          "src/pcap/reader.rs"
+        ]
+      },
+      {
+        "id": "pcapng_format",
+        "label": "PCAP-NG Format",
+        "category": "internal",
+        "description": "Parser and data structures for the PCAP-NG file format, including all block types (SHB, IDB, EPB, SPB, NRB, ISB, DSB, etc.)",
+        "files": [
+          "src/pcapng.rs",
+          "src/pcapng/block.rs",
+          "src/pcapng/section.rs",
+          "src/pcapng/section_header.rs",
+          "src/pcapng/header.rs",
+          "src/pcapng/capture.rs",
+          "src/pcapng/reader.rs",
+          "src/pcapng/option.rs",
+          "src/pcapng/enhanced_packet.rs",
+          "src/pcapng/simple_packet.rs",
+          "src/pcapng/interface_description.rs",
+          "src/pcapng/interface_statistics.rs",
+          "src/pcapng/name_resolution.rs",
+          "src/pcapng/decryption_secrets.rs",
+          "src/pcapng/process_information.rs",
+          "src/pcapng/systemd_journal_export.rs",
+          "src/pcapng/custom.rs",
+          "src/pcapng/unknown.rs",
+          "src/pcapng/time.rs"
+        ]
+      },
+      {
+        "id": "data_layer",
+        "label": "Data Layer Parsers",
+        "category": "data",
+        "description": "Parsers for specific data/link layer formats embedded in packet payloads (NFLOG, Exported PDU)",
+        "files": [
+          "src/data/mod.rs",
+          "src/data/pcap_nflog.rs",
+          "src/data/exported_pdu.rs"
+        ]
+      },
+      {
+        "id": "serialize",
+        "label": "Serialization",
+        "category": "internal",
+        "description": "Serialization support for writing PCAP/PCAP-NG data back to binary format",
+        "files": [
+          "src/serialize.rs"
+        ]
+      },
+      {
+        "id": "examples",
+        "label": "Examples",
+        "category": "frontend",
+        "description": "Example binaries demonstrating library usage (pcap-info)",
+        "files": [
+          "examples/pcap-info.rs"
+        ]
+      },
+      {
+        "id": "tests",
+        "label": "Integration Tests",
+        "category": "testing",
+        "description": "Integration test suites for PCAP, PCAP-NG parsing, and the reader interface",
+        "files": [
+          "tests/pcap.rs",
+          "tests/pcapng.rs",
+          "tests/reader.rs"
+        ]
+      },
+      {
+        "id": "benches",
+        "label": "Benchmarks",
+        "category": "testing",
+        "description": "Performance benchmarks for PCAP and PCAP-NG parsing",
+        "files": [
+          "benches/pcap.rs",
+          "benches/pcapng.rs",
+          "benches/profile_pcapng.rs"
+        ]
+      },
+      {
+        "id": "test_assets",
+        "label": "Test Assets",
+        "category": "testing",
+        "description": "Sample PCAP and PCAP-NG capture files used for testing",
+        "files": [
+          "assets/err-buffertoosmall.pcapng",
+          "assets/err-eof.bin",
+          "assets/modified-format.pcap",
+          "assets/ntp.pcap",
+          "assets/test001-be.pcapng",
+          "assets/test001-le.pcapng",
+          "assets/test010-le.pcapng",
+          "assets/test016-be.pcapng",
+          "assets/test016-le.pcapng",
+          "assets/test017-be.pcapng",
+          "assets/test017-le.pcapng",
+          "assets/wireshark_samples-test.pcapng"
+        ]
+      },
+      {
+        "id": "infra",
+        "label": "Infrastructure & Config",
+        "category": "infrastructure",
+        "description": "Build configuration, CI/CD workflows, dependency management, and changelog tooling",
+        "files": [
+          "Cargo.toml",
+          ".github/dependabot.yml",
+          ".github/workflows/rust.yml",
+          ".github/workflows/security-audit.yml",
+          ".gitignore",
+          "cliff.toml"
+        ]
+      },
+      {
+        "id": "docs",
+        "label": "Documentation",
+        "category": "docs",
+        "description": "Project documentation, README, changelog, and license files",
+        "files": [
+          "README.md",
+          "CHANGELOG.md",
+          "LICENSE-APACHE",
+          "LICENSE-MIT"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "pcap_format",
+        "target": "lib_core",
+        "label": "uses core types, errors, endianness"
+      },
+      {
+        "source": "pcap_format",
+        "target": "traits",
+        "label": "implements reader/capture traits"
+      },
+      {
+        "source": "pcapng_format",
+        "target": "lib_core",
+        "label": "uses core types, errors, endianness"
+      },
+      {
+        "source": "pcapng_format",
+        "target": "traits",
+        "label": "implements reader/capture traits"
+      },
+      {
+        "source": "data_layer",
+        "target": "lib_core",
+        "label": "uses linktype and core types"
+      },
+      {
+        "source": "serialize",
+        "target": "lib_core",
+        "label": "uses block/header types"
+      },
+      {
+        "source": "serialize",
+        "target": "pcap_format",
+        "label": "serializes PCAP structures"
+      },
+      {
+        "source": "serialize",
+        "target": "pcapng_format",
+        "label": "serializes PCAP-NG structures"
+      },
+      {
+        "source": "traits",
+        "target": "lib_core",
+        "label": "uses error types and blocks"
+      },
+      {
+        "source": "examples",
+        "target": "lib_core",
+        "label": "uses library API"
+      },
+      {
+        "source": "examples",
+        "target": "pcap_format",
+        "label": "reads PCAP files"
+      },
+      {
+        "source": "examples",
+        "target": "pcapng_format",
+        "label": "reads PCAP-NG files"
+      },
+      {
+        "source": "examples",
+        "target": "traits",
+        "label": "uses reader traits"
+      },
+      {
+        "source": "tests",
+        "target": "lib_core",
+        "label": "tests library API"
+      },
+      {
+        "source": "tests",
+        "target": "pcap_format",
+        "label": "tests PCAP parsing"
+      },
+      {
+        "source": "tests",
+        "target": "pcapng_format",
+        "label": "tests PCAP-NG parsing"
+      },
+      {
+        "source": "tests",
+        "target": "traits",
+        "label": "tests reader interface"
+      },
+      {
+        "source": "tests",
+        "target": "test_assets",
+        "label": "reads test capture files"
+      },
+      {
+        "source": "benches",
+        "target": "lib_core",
+        "label": "benchmarks parsing"
+      },
+      {
+        "source": "benches",
+        "target": "pcap_format",
+        "label": "benchmarks PCAP"
+      },
+      {
+        "source": "benches",
+        "target": "pcapng_format",
+        "label": "benchmarks PCAP-NG"
+      },
+      {
+        "source": "benches",
+        "target": "test_assets",
+        "label": "reads sample files"
+      },
+      {
+        "source": "infra",
+        "target": "lib_core",
+        "label": "builds and configures project"
+      }
+    ],
+    "categories": [
+      {
+        "name": "library",
+        "color": "#4A90D9",
+        "description": "Public library interface, core types, traits, and re-exports"
+      },
+      {
+        "name": "internal",
+        "color": "#7B68EE",
+        "description": "Internal format-specific parsing and serialization logic"
+      },
+      {
+        "name": "data",
+        "color": "#E8A838",
+        "description": "Data/link-layer payload parsers"
+      },
+      {
+        "name": "frontend",
+        "color": "#50C878",
+        "description": "User-facing example programs"
+      },
+      {
+        "name": "testing",
+        "color": "#FF6B6B",
+        "description": "Tests, benchmarks, and test data"
+      },
+      {
+        "name": "infrastructure",
+        "color": "#A0A0A0",
+        "description": "Build tooling, CI/CD, and project configuration"
+      },
+      {
+        "name": "docs",
+        "color": "#C8A2C8",
+        "description": "Documentation and license files"
+      }
+    ],
+    "sections": [
+      {
+        "name": "Core Library",
+        "nodeIds": [
+          "lib_core",
+          "traits"
+        ]
+      },
+      {
+        "name": "Format Parsers",
+        "nodeIds": [
+          "pcap_format",
+          "pcapng_format",
+          "data_layer",
+          "serialize"
+        ]
+      },
+      {
+        "name": "Testing & Benchmarks",
+        "nodeIds": [
+          "tests",
+          "benches",
+          "test_assets"
+        ]
+      },
+      {
+        "name": "Examples & Documentation",
+        "nodeIds": [
+          "examples",
+          "docs"
+        ]
+      },
+      {
+        "name": "Infrastructure",
+        "nodeIds": [
+          "infra"
+        ]
+      }
+    ],
+    "summary": "pcap-parser is a Rust library for parsing PCAP and PCAP-NG network capture file formats. The architecture centers on a core library layer that defines common types (link types, error types, endianness handling, block enumerations) and abstract traits for capture reading. Two parallel internal modules implement format-specific parsing: one for the legacy PCAP format and one for the more modern PCAP-NG format with its rich set of block types (section headers, interface descriptions, enhanced packets, name resolution, decryption secrets, etc.). A data layer provides additional parsers for specific link-layer payload formats like NFLOG and Exported PDU. Serialization support allows writing parsed structures back to binary. The project includes comprehensive integration tests and benchmarks backed by sample capture files, an example binary for inspecting capture files, and standard Rust CI/CD infrastructure."
+  },
+  "savedAt": "2026-05-26T01:57:03.119Z"
+}

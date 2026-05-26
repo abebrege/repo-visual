@@ -1,0 +1,1104 @@
+{
+  "name": "libgcrypt",
+  "repoUrl": "https://github.com/gpg/libgcrypt.git",
+  "dag": {
+    "nodes": [
+      {
+        "id": "public-api",
+        "label": "Public API & Headers",
+        "category": "api",
+        "description": "Public API headers (gcrypt.h), visibility control, and exported symbols defining the library interface",
+        "files": [
+          "src/gcrypt.h.in",
+          "src/gcrypt-int.h",
+          "src/gcrypt-testapi.h",
+          "src/visibility.c",
+          "src/visibility.h",
+          "src/libgcrypt.def",
+          "src/libgcrypt.vers",
+          "src/cipher-proto.h",
+          "src/cipher.h",
+          "src/mpi.h",
+          "src/types.h"
+        ]
+      },
+      {
+        "id": "core",
+        "label": "Core Library Runtime",
+        "category": "backend",
+        "description": "Core runtime: global initialization, FIPS mode, context management, memory management, and utility functions",
+        "files": [
+          "src/global.c",
+          "src/fips.c",
+          "src/context.c",
+          "src/context.h",
+          "src/ec-context.h",
+          "src/g10lib.h",
+          "src/misc.c",
+          "src/missing-string.c",
+          "src/sexp.c",
+          "src/const-time.c",
+          "src/const-time.h"
+        ]
+      },
+      {
+        "id": "memory",
+        "label": "Memory Management",
+        "category": "backend",
+        "description": "Standard and secure memory allocation subsystems",
+        "files": [
+          "src/secmem.c",
+          "src/secmem.h",
+          "src/stdmem.c",
+          "src/stdmem.h"
+        ]
+      },
+      {
+        "id": "hwfeatures",
+        "label": "Hardware Feature Detection",
+        "category": "internal",
+        "description": "CPU feature detection for x86, ARM, PPC, RISC-V, and s390x to enable hardware-accelerated implementations",
+        "files": [
+          "src/hwfeatures.c",
+          "src/hwf-common.h",
+          "src/hwf-x86.c",
+          "src/hwf-arm.c",
+          "src/hwf-ppc.c",
+          "src/hwf-riscv.c",
+          "src/hwf-s390x.c"
+        ]
+      },
+      {
+        "id": "symmetric-ciphers",
+        "label": "Symmetric Ciphers",
+        "category": "library",
+        "description": "Block and stream cipher implementations: AES (Rijndael), Blowfish, Camellia, CAST5, DES, IDEA, Serpent, Twofish, SEED, SM4, ARIA, GOST, ChaCha20, Salsa20, Arcfour, RFC2268",
+        "files": [
+          "cipher/cipher.c",
+          "cipher/cipher-internal.h",
+          "cipher/rijndael.c",
+          "cipher/rijndael-internal.h",
+          "cipher/rijndael-tables.h",
+          "cipher/rijndael-aesni.c",
+          "cipher/rijndael-amd64.S",
+          "cipher/rijndael-aarch64.S",
+          "cipher/rijndael-arm.S",
+          "cipher/rijndael-armv8-aarch32-ce.S",
+          "cipher/rijndael-armv8-aarch64-ce.S",
+          "cipher/rijndael-armv8-ce.c",
+          "cipher/rijndael-padlock.c",
+          "cipher/rijndael-ppc.c",
+          "cipher/rijndael-ppc-common.h",
+          "cipher/rijndael-ppc-functions.h",
+          "cipher/rijndael-ppc9le.c",
+          "cipher/rijndael-s390x.c",
+          "cipher/rijndael-ssse3-amd64-asm.S",
+          "cipher/rijndael-ssse3-amd64.c",
+          "cipher/rijndael-vaes-avx2-amd64.S",
+          "cipher/rijndael-vaes-avx2-i386.S",
+          "cipher/rijndael-vaes-avx512-amd64.S",
+          "cipher/rijndael-vaes-i386.c",
+          "cipher/rijndael-vaes.c",
+          "cipher/rijndael-vp-aarch64.c",
+          "cipher/rijndael-vp-riscv.c",
+          "cipher/rijndael-vp-simd128.h",
+          "cipher/rijndael-gcm-p10le.s",
+          "cipher/rijndael-p10le.c",
+          "cipher/rijndael-riscv-zvkned.c",
+          "cipher/blowfish.c",
+          "cipher/blowfish-amd64.S",
+          "cipher/blowfish-arm.S",
+          "cipher/camellia.c",
+          "cipher/camellia.h",
+          "cipher/camellia-glue.c",
+          "cipher/camellia-aarch64.S",
+          "cipher/camellia-aarch64-ce.c",
+          "cipher/camellia-aesni-avx-amd64.S",
+          "cipher/camellia-aesni-avx2-amd64.S",
+          "cipher/camellia-aesni-avx2-amd64.h",
+          "cipher/camellia-arm.S",
+          "cipher/camellia-gfni-avx2-amd64.S",
+          "cipher/camellia-gfni-avx512-amd64.S",
+          "cipher/camellia-ppc8le.c",
+          "cipher/camellia-ppc9le.c",
+          "cipher/camellia-simd128.h",
+          "cipher/camellia-vaes-avx2-amd64.S",
+          "cipher/cast5.c",
+          "cipher/cast5-amd64.S",
+          "cipher/cast5-arm.S",
+          "cipher/des.c",
+          "cipher/des-amd64.S",
+          "cipher/idea.c",
+          "cipher/serpent.c",
+          "cipher/serpent-armv7-neon.S",
+          "cipher/serpent-avx2-amd64.S",
+          "cipher/serpent-avx512-x86.c",
+          "cipher/serpent-sse2-amd64.S",
+          "cipher/twofish.c",
+          "cipher/twofish-aarch64.S",
+          "cipher/twofish-amd64.S",
+          "cipher/twofish-arm.S",
+          "cipher/twofish-avx2-amd64.S",
+          "cipher/seed.c",
+          "cipher/sm4.c",
+          "cipher/sm4-aarch64.S",
+          "cipher/sm4-aesni-avx-amd64.S",
+          "cipher/sm4-aesni-avx2-amd64.S",
+          "cipher/sm4-armv8-aarch64-ce.S",
+          "cipher/sm4-armv9-aarch64-sve-ce.S",
+          "cipher/sm4-gfni-avx2-amd64.S",
+          "cipher/sm4-gfni-avx512-amd64.S",
+          "cipher/sm4-ppc.c",
+          "cipher/aria.c",
+          "cipher/aria-aesni-avx-amd64.S",
+          "cipher/aria-aesni-avx2-amd64.S",
+          "cipher/aria-gfni-avx512-amd64.S",
+          "cipher/gost28147.c",
+          "cipher/gost-s-box.c",
+          "cipher/gost.h",
+          "cipher/chacha20.c",
+          "cipher/chacha20-aarch64.S",
+          "cipher/chacha20-amd64-avx2.S",
+          "cipher/chacha20-amd64-avx512.S",
+          "cipher/chacha20-amd64-ssse3.S",
+          "cipher/chacha20-armv7-neon.S",
+          "cipher/chacha20-p10le-8x.s",
+          "cipher/chacha20-ppc.c",
+          "cipher/chacha20-riscv-v.c",
+          "cipher/chacha20-s390x.S",
+          "cipher/salsa20.c",
+          "cipher/salsa20-amd64.S",
+          "cipher/salsa20-armv7-neon.S",
+          "cipher/arcfour.c",
+          "cipher/arcfour-amd64.S",
+          "cipher/rfc2268.c"
+        ]
+      },
+      {
+        "id": "cipher-modes",
+        "label": "Cipher Modes of Operation",
+        "category": "library",
+        "description": "Block cipher modes: CBC, CFB, CTR, OFB, CCM, GCM, OCB, EAX, XTS, SIV, GCM-SIV, AES-Wrap, Poly1305-AEAD",
+        "files": [
+          "cipher/cipher-cbc.c",
+          "cipher/cipher-cfb.c",
+          "cipher/cipher-ctr.c",
+          "cipher/cipher-ofb.c",
+          "cipher/cipher-ccm.c",
+          "cipher/cipher-gcm.c",
+          "cipher/cipher-gcm-aarch64-simd.c",
+          "cipher/cipher-gcm-armv7-neon.S",
+          "cipher/cipher-gcm-armv8-aarch32-ce.S",
+          "cipher/cipher-gcm-armv8-aarch64-ce.S",
+          "cipher/cipher-gcm-intel-pclmul.c",
+          "cipher/cipher-gcm-ppc.c",
+          "cipher/cipher-gcm-riscv-zbb-zbc.c",
+          "cipher/cipher-gcm-riscv-zvkg.c",
+          "cipher/cipher-gcm-siv.c",
+          "cipher/cipher-ocb.c",
+          "cipher/cipher-eax.c",
+          "cipher/cipher-xts.c",
+          "cipher/cipher-siv.c",
+          "cipher/cipher-aeswrap.c",
+          "cipher/cipher-poly1305.c",
+          "cipher/cipher-cmac.c"
+        ]
+      },
+      {
+        "id": "hash",
+        "label": "Hash Functions",
+        "category": "library",
+        "description": "Cryptographic hash functions: MD2, MD4, MD5, SHA-1, SHA-256, SHA-512, RIPEMD-160, Tiger, Whirlpool, SM3, BLAKE2, Keccak/SHA-3, Stribog, GOSTR3411, CRC",
+        "files": [
+          "cipher/md.c",
+          "cipher/hash-common.c",
+          "cipher/hash-common.h",
+          "cipher/md2.c",
+          "cipher/md4.c",
+          "cipher/md5.c",
+          "cipher/sha1.c",
+          "cipher/sha1.h",
+          "cipher/sha1-armv7-neon.S",
+          "cipher/sha1-armv8-aarch32-ce.S",
+          "cipher/sha1-armv8-aarch64-ce.S",
+          "cipher/sha1-avx-amd64.S",
+          "cipher/sha1-avx-bmi2-amd64.S",
+          "cipher/sha1-avx2-bmi2-amd64.S",
+          "cipher/sha1-intel-shaext.c",
+          "cipher/sha1-ssse3-amd64.S",
+          "cipher/sha256.c",
+          "cipher/sha256-armv8-aarch32-ce.S",
+          "cipher/sha256-armv8-aarch64-ce.S",
+          "cipher/sha256-avx-amd64.S",
+          "cipher/sha256-avx2-bmi2-amd64.S",
+          "cipher/sha256-intel-shaext.c",
+          "cipher/sha256-ppc.c",
+          "cipher/sha256-riscv-zvknha-zvkb.c",
+          "cipher/sha256-ssse3-amd64.S",
+          "cipher/sha512.c",
+          "cipher/sha512-arm.S",
+          "cipher/sha512-armv7-neon.S",
+          "cipher/sha512-armv8-aarch64-ce.S",
+          "cipher/sha512-avx-amd64.S",
+          "cipher/sha512-avx2-bmi2-amd64.S",
+          "cipher/sha512-avx512-amd64.S",
+          "cipher/sha512-ppc.c",
+          "cipher/sha512-riscv-zvknhb-zvkb.c",
+          "cipher/sha512-ssse3-amd64.S",
+          "cipher/sha512-ssse3-i386.c",
+          "cipher/rmd160.c",
+          "cipher/tiger.c",
+          "cipher/whirlpool.c",
+          "cipher/whirlpool-sse2-amd64.S",
+          "cipher/sm3.c",
+          "cipher/sm3-aarch64.S",
+          "cipher/sm3-armv8-aarch64-ce.S",
+          "cipher/sm3-avx-bmi2-amd64.S",
+          "cipher/blake2.c",
+          "cipher/blake2b-amd64-avx2.S",
+          "cipher/blake2b-amd64-avx512.S",
+          "cipher/blake2s-amd64-avx.S",
+          "cipher/blake2s-amd64-avx512.S",
+          "cipher/keccak.c",
+          "cipher/keccak-amd64-avx512.S",
+          "cipher/keccak-armv7-neon.S",
+          "cipher/keccak_permute_32.h",
+          "cipher/keccak_permute_64.h",
+          "cipher/stribog.c",
+          "cipher/gostr3411-94.c",
+          "cipher/crc.c",
+          "cipher/crc-armv8-aarch64-ce.S",
+          "cipher/crc-armv8-ce.c",
+          "cipher/crc-intel-pclmul.c",
+          "cipher/crc-ppc.c",
+          "cipher/crc-riscv-zbb-zbc.c"
+        ]
+      },
+      {
+        "id": "mac",
+        "label": "MAC Functions",
+        "category": "library",
+        "description": "Message Authentication Code implementations: HMAC, CMAC, GMAC, Poly1305",
+        "files": [
+          "cipher/mac.c",
+          "cipher/mac-internal.h",
+          "cipher/mac-hmac.c",
+          "cipher/mac-cmac.c",
+          "cipher/mac-gmac.c",
+          "cipher/mac-poly1305.c",
+          "cipher/poly1305.c",
+          "cipher/poly1305-internal.h",
+          "cipher/poly1305-amd64-avx512.S",
+          "cipher/poly1305-p10le.s",
+          "cipher/poly1305-s390x.S"
+        ]
+      },
+      {
+        "id": "pubkey",
+        "label": "Public Key Cryptography",
+        "category": "library",
+        "description": "Asymmetric key algorithms: RSA, DSA, ElGamal, ECC (ECDSA, EdDSA, ECDH, GOST, SM2), and public key dispatch",
+        "files": [
+          "cipher/pubkey.c",
+          "cipher/pubkey-internal.h",
+          "cipher/pubkey-util.c",
+          "cipher/rsa.c",
+          "cipher/rsa-common.c",
+          "cipher/dsa.c",
+          "cipher/dsa-common.c",
+          "cipher/elgamal.c",
+          "cipher/ecc.c",
+          "cipher/ecc-common.h",
+          "cipher/ecc-curves.c",
+          "cipher/ecc-ecdh.c",
+          "cipher/ecc-ecdsa.c",
+          "cipher/ecc-eddsa.c",
+          "cipher/ecc-gost.c",
+          "cipher/ecc-misc.c",
+          "cipher/ecc-sm2.c",
+          "cipher/primegen.c"
+        ]
+      },
+      {
+        "id": "pqc",
+        "label": "Post-Quantum Cryptography",
+        "category": "library",
+        "description": "Post-quantum cryptographic algorithms: Dilithium (ML-DSA), Kyber (ML-KEM), Classic McEliece, NTRU Prime (sntrup761), and KEM dispatch",
+        "files": [
+          "cipher/kem.c",
+          "cipher/kem-ecc.c",
+          "cipher/kem-ecc.h",
+          "cipher/dilithium.c",
+          "cipher/dilithium.h",
+          "cipher/dilithium-common.c",
+          "cipher/dilithium-dep.c",
+          "cipher/pubkey-dilithium.c",
+          "cipher/kyber.c",
+          "cipher/kyber.h",
+          "cipher/kyber-common.c",
+          "cipher/kyber-kdep.c",
+          "cipher/mceliece6688128f.c",
+          "cipher/mceliece6688128f.h",
+          "cipher/mceliece6688128f.sh",
+          "cipher/sntrup761.c",
+          "cipher/sntrup761.h"
+        ]
+      },
+      {
+        "id": "kdf",
+        "label": "Key Derivation Functions",
+        "category": "library",
+        "description": "Key derivation: PBKDF2, scrypt, and related KDF implementations",
+        "files": [
+          "cipher/kdf.c",
+          "cipher/kdf-internal.h",
+          "cipher/scrypt.c"
+        ]
+      },
+      {
+        "id": "cipher-common",
+        "label": "Cipher Common Helpers",
+        "category": "internal",
+        "description": "Shared assembly helpers, SIMD abstractions, buffer helpers, and bit manipulation utilities used across cipher implementations",
+        "files": [
+          "cipher/Makefile.am",
+          "cipher/asm-common-aarch64.h",
+          "cipher/asm-common-amd64.h",
+          "cipher/asm-common-i386.h",
+          "cipher/asm-common-s390x.h",
+          "cipher/asm-inline-s390x.h",
+          "cipher/asm-poly1305-aarch64.h",
+          "cipher/asm-poly1305-amd64.h",
+          "cipher/asm-poly1305-s390x.h",
+          "cipher/simd-common-aarch64.h",
+          "cipher/simd-common-ppc.h",
+          "cipher/simd-common-riscv.h",
+          "cipher/bithelp.h",
+          "cipher/bufhelp.h",
+          "cipher/bulkhelp.h"
+        ]
+      },
+      {
+        "id": "mpi",
+        "label": "Multi-Precision Integer (MPI)",
+        "category": "library",
+        "description": "Big number arithmetic library with platform-specific assembly optimizations for multiple architectures, plus elliptic curve point operations",
+        "files": [
+          "mpi/Makefile.am",
+          "mpi/mpi-add.c",
+          "mpi/mpi-bit.c",
+          "mpi/mpi-cmp.c",
+          "mpi/mpi-div.c",
+          "mpi/mpi-gcd.c",
+          "mpi/mpi-inline.c",
+          "mpi/mpi-inline.h",
+          "mpi/mpi-internal.h",
+          "mpi/mpi-inv.c",
+          "mpi/mpi-mod.c",
+          "mpi/mpi-mpow.c",
+          "mpi/mpi-mul.c",
+          "mpi/mpi-pow.c",
+          "mpi/mpi-scan.c",
+          "mpi/mpicoder.c",
+          "mpi/mpih-const-time.c",
+          "mpi/mpih-div.c",
+          "mpi/mpih-mul.c",
+          "mpi/mpih-pow.c",
+          "mpi/mpiutil.c",
+          "mpi/longlong.h",
+          "mpi/config.links",
+          "mpi/ec.c",
+          "mpi/ec-ed25519.c",
+          "mpi/ec-hw-s390x.c",
+          "mpi/ec-inline.h",
+          "mpi/ec-internal.h",
+          "mpi/ec-nist.c"
+        ]
+      },
+      {
+        "id": "mpi-asm",
+        "label": "MPI Platform Assembly",
+        "category": "internal",
+        "description": "Architecture-specific assembly implementations for MPI low-level operations (amd64, aarch64, arm, i386, alpha, mips, sparc, power, m68k, hppa, etc.)",
+        "files": [
+          "mpi/aarch64/distfiles",
+          "mpi/aarch64/mpi-asm-defs.h",
+          "mpi/aarch64/mpih-add1.S",
+          "mpi/aarch64/mpih-mul1.S",
+          "mpi/aarch64/mpih-mul2.S",
+          "mpi/aarch64/mpih-mul3.S",
+          "mpi/aarch64/mpih-sub1.S",
+          "mpi/amd64/distfiles",
+          "mpi/amd64/func_abi.h",
+          "mpi/amd64/mpi-asm-defs.h",
+          "mpi/amd64/mpih-add1.S",
+          "mpi/amd64/mpih-lshift.S",
+          "mpi/amd64/mpih-mul1.S",
+          "mpi/amd64/mpih-mul2.S",
+          "mpi/amd64/mpih-mul3.S",
+          "mpi/amd64/mpih-rshift.S",
+          "mpi/amd64/mpih-sub1.S",
+          "mpi/arm/distfiles",
+          "mpi/arm/mpi-asm-defs.h",
+          "mpi/arm/mpih-add1.S",
+          "mpi/arm/mpih-mul1.S",
+          "mpi/arm/mpih-mul2.S",
+          "mpi/arm/mpih-mul3.S",
+          "mpi/arm/mpih-sub1.S",
+          "mpi/i386/distfiles",
+          "mpi/i386/mpih-add1.S",
+          "mpi/i386/mpih-lshift.S",
+          "mpi/i386/mpih-mul1.S",
+          "mpi/i386/mpih-mul2.S",
+          "mpi/i386/mpih-mul3.S",
+          "mpi/i386/mpih-rshift.S",
+          "mpi/i386/mpih-sub1.S",
+          "mpi/i386/syntax.h",
+          "mpi/generic/distfiles",
+          "mpi/generic/mpi-asm-defs.h",
+          "mpi/generic/mpih-add1.c",
+          "mpi/generic/mpih-lshift.c",
+          "mpi/generic/mpih-mul1.c",
+          "mpi/generic/mpih-mul2.c",
+          "mpi/generic/mpih-mul3.c",
+          "mpi/generic/mpih-rshift.c",
+          "mpi/generic/mpih-sub1.c",
+          "mpi/generic/udiv-w-sdiv.c",
+          "mpi/asm-common-aarch64.h",
+          "mpi/asm-common-amd64.h",
+          "mpi/asm-common-i386.h",
+          "mpi/alpha/README",
+          "mpi/alpha/distfiles",
+          "mpi/alpha/mpih-add1.S",
+          "mpi/alpha/mpih-lshift.S",
+          "mpi/alpha/mpih-mul1.S",
+          "mpi/alpha/mpih-mul2.S",
+          "mpi/alpha/mpih-mul3.S",
+          "mpi/alpha/mpih-rshift.S",
+          "mpi/alpha/mpih-sub1.S",
+          "mpi/alpha/udiv-qrnnd.S",
+          "mpi/hppa/README",
+          "mpi/hppa/distfiles",
+          "mpi/hppa/mpih-add1.S",
+          "mpi/hppa/mpih-lshift.S",
+          "mpi/hppa/mpih-rshift.S",
+          "mpi/hppa/mpih-sub1.S",
+          "mpi/hppa/udiv-qrnnd.S",
+          "mpi/hppa1.1/distfiles",
+          "mpi/hppa1.1/mpih-mul1.S",
+          "mpi/hppa1.1/mpih-mul2.S",
+          "mpi/hppa1.1/mpih-mul3.S",
+          "mpi/hppa1.1/udiv-qrnnd.S",
+          "mpi/m68k/distfiles",
+          "mpi/m68k/mc68020/distfiles",
+          "mpi/m68k/mc68020/mpih-mul1.S",
+          "mpi/m68k/mc68020/mpih-mul2.S",
+          "mpi/m68k/mc68020/mpih-mul3.S",
+          "mpi/m68k/mpih-add1.S",
+          "mpi/m68k/mpih-lshift.S",
+          "mpi/m68k/mpih-rshift.S",
+          "mpi/m68k/mpih-sub1.S",
+          "mpi/m68k/syntax.h",
+          "mpi/mips3/README",
+          "mpi/mips3/distfiles",
+          "mpi/mips3/mpi-asm-defs.h",
+          "mpi/mips3/mpih-add1.S",
+          "mpi/mips3/mpih-lshift.S",
+          "mpi/mips3/mpih-mul1.S",
+          "mpi/mips3/mpih-mul2.S",
+          "mpi/mips3/mpih-mul3.S",
+          "mpi/mips3/mpih-rshift.S",
+          "mpi/mips3/mpih-sub1.S",
+          "mpi/pa7100/distfiles",
+          "mpi/pa7100/mpih-lshift.S",
+          "mpi/pa7100/mpih-rshift.S",
+          "mpi/power/distfiles",
+          "mpi/power/mpih-add1.S",
+          "mpi/power/mpih-lshift.S",
+          "mpi/power/mpih-mul1.S",
+          "mpi/power/mpih-mul2.S",
+          "mpi/power/mpih-mul3.S",
+          "mpi/power/mpih-rshift.S",
+          "mpi/power/mpih-sub1.S",
+          "mpi/powerpc32/distfiles",
+          "mpi/powerpc32/mpih-add1.S",
+          "mpi/powerpc32/mpih-lshift.S",
+          "mpi/powerpc32/mpih-mul1.S",
+          "mpi/powerpc32/mpih-mul2.S",
+          "mpi/powerpc32/mpih-mul3.S",
+          "mpi/powerpc32/mpih-rshift.S",
+          "mpi/powerpc32/mpih-sub1.S",
+          "mpi/powerpc32/syntax.h",
+          "mpi/powerpc64/distfiles",
+          "mpi/sparc32/distfiles",
+          "mpi/sparc32/mpih-add1.S",
+          "mpi/sparc32/mpih-lshift.S",
+          "mpi/sparc32/mpih-rshift.S",
+          "mpi/sparc32/udiv.S",
+          "mpi/sparc32v8/distfiles",
+          "mpi/sparc32v8/mpih-mul1.S",
+          "mpi/sparc32v8/mpih-mul2.S",
+          "mpi/sparc32v8/mpih-mul3.S",
+          "mpi/supersparc/distfiles",
+          "mpi/supersparc/udiv.S"
+        ]
+      },
+      {
+        "id": "random",
+        "label": "Random Number Generation",
+        "category": "library",
+        "description": "Random number subsystem: CSPRNG, DRBG, system RNG, and entropy sources (Linux, Unix, Windows, EGD, hardware RNG, Jitter entropy)",
+        "files": [
+          "random/Makefile.am",
+          "random/random.c",
+          "random/random.h",
+          "random/rand-internal.h",
+          "random/random-csprng.c",
+          "random/random-drbg.c",
+          "random/random-system.c",
+          "random/rndoldlinux.c",
+          "random/rndunix.c",
+          "random/rndw32.c",
+          "random/rndegd.c",
+          "random/rndgetentropy.c",
+          "random/rndhw.c",
+          "random/rndjent.c"
+        ]
+      },
+      {
+        "id": "jitterentropy",
+        "label": "Jitter Entropy",
+        "category": "internal",
+        "description": "Embedded jitterentropy library for CPU-based entropy collection",
+        "files": [
+          "random/jitterentropy.h",
+          "random/jitterentropy-base.c",
+          "random/jitterentropy-base.h",
+          "random/jitterentropy-base-user.h",
+          "random/jitterentropy-gcd.c",
+          "random/jitterentropy-gcd.h",
+          "random/jitterentropy-health.c",
+          "random/jitterentropy-health.h",
+          "random/jitterentropy-noise.c",
+          "random/jitterentropy-noise.h",
+          "random/jitterentropy-sha3.c",
+          "random/jitterentropy-sha3.h",
+          "random/jitterentropy-timer.c",
+          "random/jitterentropy-timer.h"
+        ]
+      },
+      {
+        "id": "compat",
+        "label": "Compatibility Layer",
+        "category": "backend",
+        "description": "Compatibility shim for platform-specific differences",
+        "files": [
+          "compat/Makefile.am",
+          "compat/compat.c",
+          "compat/libcompat.h"
+        ]
+      },
+      {
+        "id": "hmac256",
+        "label": "HMAC-SHA256 (Standalone)",
+        "category": "internal",
+        "description": "Standalone HMAC-SHA256 implementation used for FIPS integrity checking",
+        "files": [
+          "src/hmac256.c",
+          "src/hmac256.h",
+          "src/gen-note-integrity.sh"
+        ]
+      },
+      {
+        "id": "tools",
+        "label": "Utility Programs",
+        "category": "backend",
+        "description": "Standalone utility programs: dumpsexp, mpicalc",
+        "files": [
+          "src/dumpsexp.c",
+          "src/mpicalc.c"
+        ]
+      },
+      {
+        "id": "tests",
+        "label": "Test Suite",
+        "category": "testing",
+        "description": "Comprehensive test programs covering all cryptographic primitives, FIPS compliance, threading, key generation, and benchmarks",
+        "files": [
+          "tests/Makefile.am",
+          "tests/README",
+          "tests/t-common.h",
+          "tests/stopwatch.h",
+          "tests/basic.c",
+          "tests/basic-disable-all-hwf.in",
+          "tests/basic_all_hwfeature_combinations.sh",
+          "tests/aeswrap.c",
+          "tests/bench-slope.c",
+          "tests/benchmark.c",
+          "tests/curves.c",
+          "tests/dsa-rfc6979.c",
+          "tests/fips186-dsa.c",
+          "tests/fipsdrv.c",
+          "tests/fipsrngdrv.c",
+          "tests/gchash.c",
+          "tests/genhashdata.c",
+          "tests/hashtest.c",
+          "tests/hashtest-256g.in",
+          "tests/hashtest-6g.in",
+          "tests/hmac.c",
+          "tests/keygen.c",
+          "tests/keygrip.c",
+          "tests/mpitests.c",
+          "tests/pkbench.c",
+          "tests/pkcs1v2.c",
+          "tests/pkcs1v2-oaep.h",
+          "tests/pkcs1v2-pss.h",
+          "tests/pkcs1v2-v15c.h",
+          "tests/pkcs1v2-v15s.h",
+          "tests/pkcstv2c.awk",
+          "tests/prime.c",
+          "tests/pubkey.c",
+          "tests/random.c",
+          "tests/rsa-16k.key",
+          "tests/rsacvt.c",
+          "tests/t-convert.c",
+          "tests/t-cv25519.c",
+          "tests/t-dsa.c",
+          "tests/t-dsa.inp",
+          "tests/t-ecdsa.c",
+          "tests/t-ecdsa.inp",
+          "tests/t-ed25519.c",
+          "tests/t-ed25519.inp",
+          "tests/t-ed448.c",
+          "tests/t-ed448.inp",
+          "tests/t-fips-service-ind.c",
+          "tests/t-kdf.c",
+          "tests/t-kem.c",
+          "tests/t-lock.c",
+          "tests/t-mldsa.c",
+          "tests/t-mldsa.inp",
+          "tests/t-mlkem.c",
+          "tests/t-mlkem.inp",
+          "tests/t-mpi-bit.c",
+          "tests/t-mpi-point.c",
+          "tests/t-rsa-15.c",
+          "tests/t-rsa-15.inp",
+          "tests/t-rsa-pss.c",
+          "tests/t-rsa-pss.inp",
+          "tests/t-rsa-testparm.c",
+          "tests/t-secmem.c",
+          "tests/t-sexp.c",
+          "tests/t-thread-local.c",
+          "tests/t-x448.c",
+          "tests/testapi.c",
+          "tests/testdrv.c",
+          "tests/version.c",
+          "tests/blake2b.h",
+          "tests/blake2s.h",
+          "tests/sha3-224.h",
+          "tests/sha3-256.h",
+          "tests/sha3-384.h",
+          "tests/sha3-512.h"
+        ]
+      },
+      {
+        "id": "build-system",
+        "label": "Build System",
+        "category": "infrastructure",
+        "description": "Autotools build system: configure.ac, Makefile.am, m4 macros, libtool, autogen scripts, and pkg-config/m4 templates",
+        "files": [
+          "configure.ac",
+          "Makefile.am",
+          "acinclude.m4",
+          "autogen.sh",
+          "autogen.rc",
+          "mkinstalldirs",
+          "stamp-h.in",
+          "src/Makefile.am",
+          "src/libgcrypt-config.in",
+          "src/libgcrypt.m4",
+          "src/libgcrypt.pc.in",
+          "src/versioninfo.rc.in",
+          "m4/Makefile.am",
+          "m4/ax_cc_for_build.m4",
+          "m4/gpg-error.m4",
+          "m4/libtool.m4",
+          "m4/ltoptions.m4",
+          "m4/ltsugar.m4",
+          "m4/ltversion.m4",
+          "m4/lt~obsolete.m4",
+          "m4/noexecstack.m4"
+        ]
+      },
+      {
+        "id": "build-aux",
+        "label": "Build Auxiliary Scripts",
+        "category": "infrastructure",
+        "description": "Build support scripts: config.guess, config.sub, compile, install-sh, ltmain, git hooks, and related helpers",
+        "files": [
+          "build-aux/compile",
+          "build-aux/config.guess",
+          "build-aux/config.rpath",
+          "build-aux/config.sub",
+          "build-aux/db2any",
+          "build-aux/depcomp",
+          "build-aux/distfiles",
+          "build-aux/git-hooks/commit-msg",
+          "build-aux/git-log-fix",
+          "build-aux/git-log-footer",
+          "build-aux/install-sh",
+          "build-aux/libtool-patch.sed",
+          "build-aux/ltmain.sh",
+          "build-aux/mdate-sh",
+          "build-aux/missing",
+          "build-aux/texinfo.tex"
+        ]
+      },
+      {
+        "id": "docs",
+        "label": "Documentation",
+        "category": "docs",
+        "description": "Project documentation: Texinfo manual, API change notes, HACKING guide, announcements, license texts, and related files",
+        "files": [
+          "doc/Makefile.am",
+          "doc/gcrypt.texi",
+          "doc/gpl.texi",
+          "doc/lgpl.texi",
+          "doc/HACKING",
+          "doc/DCO",
+          "doc/README.apichanges",
+          "doc/Notes-wk",
+          "doc/announce-1.4.txt",
+          "doc/announce.txt",
+          "doc/fips-fsm.fig",
+          "doc/libgcrypt-modules.fig",
+          "doc/yat2m.c",
+          "README",
+          "README.GIT",
+          "NEWS",
+          "AUTHORS",
+          "THANKS",
+          "TODO",
+          "INSTALL",
+          "COPYING",
+          "COPYING.LIB",
+          "LICENSES",
+          "libgcrypt.txt",
+          ".mailmap",
+          ".gitignore"
+        ]
+      },
+      {
+        "id": "changelogs",
+        "label": "ChangeLogs",
+        "category": "docs",
+        "description": "Historical change log files for various subsystems",
+        "files": [
+          "ChangeLog",
+          "ChangeLog-2011",
+          "build-aux/ChangeLog-2011",
+          "cipher/ChangeLog-2011",
+          "doc/ChangeLog-2011",
+          "m4/ChangeLog-2011",
+          "mpi/ChangeLog-2011",
+          "random/ChangeLog-2011",
+          "src/ChangeLog-2011",
+          "tests/ChangeLog-2011",
+          "cipher/test-getrusage.c"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "public-api",
+        "target": "core",
+        "label": "defines interface for"
+      },
+      {
+        "source": "core",
+        "target": "memory",
+        "label": "uses"
+      },
+      {
+        "source": "core",
+        "target": "hwfeatures",
+        "label": "initializes"
+      },
+      {
+        "source": "core",
+        "target": "hmac256",
+        "label": "FIPS integrity check"
+      },
+      {
+        "source": "symmetric-ciphers",
+        "target": "cipher-common",
+        "label": "uses helpers"
+      },
+      {
+        "source": "symmetric-ciphers",
+        "target": "hwfeatures",
+        "label": "selects implementation"
+      },
+      {
+        "source": "symmetric-ciphers",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "cipher-modes",
+        "target": "symmetric-ciphers",
+        "label": "operates on"
+      },
+      {
+        "source": "cipher-modes",
+        "target": "cipher-common",
+        "label": "uses helpers"
+      },
+      {
+        "source": "hash",
+        "target": "cipher-common",
+        "label": "uses helpers"
+      },
+      {
+        "source": "hash",
+        "target": "hwfeatures",
+        "label": "selects implementation"
+      },
+      {
+        "source": "hash",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "mac",
+        "target": "hash",
+        "label": "HMAC uses hash"
+      },
+      {
+        "source": "mac",
+        "target": "cipher-modes",
+        "label": "CMAC/GMAC uses modes"
+      },
+      {
+        "source": "mac",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "pubkey",
+        "target": "mpi",
+        "label": "uses MPI arithmetic"
+      },
+      {
+        "source": "pubkey",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "pubkey",
+        "target": "random",
+        "label": "uses for key generation"
+      },
+      {
+        "source": "pqc",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "pqc",
+        "target": "random",
+        "label": "uses for key generation"
+      },
+      {
+        "source": "pqc",
+        "target": "hash",
+        "label": "uses hash functions"
+      },
+      {
+        "source": "pqc",
+        "target": "pubkey",
+        "label": "extends pubkey dispatch"
+      },
+      {
+        "source": "kdf",
+        "target": "hash",
+        "label": "uses hash/MAC"
+      },
+      {
+        "source": "kdf",
+        "target": "mac",
+        "label": "uses HMAC"
+      },
+      {
+        "source": "kdf",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "mpi",
+        "target": "mpi-asm",
+        "label": "platform dispatch"
+      },
+      {
+        "source": "mpi",
+        "target": "memory",
+        "label": "uses secure memory"
+      },
+      {
+        "source": "random",
+        "target": "jitterentropy",
+        "label": "entropy source"
+      },
+      {
+        "source": "random",
+        "target": "core",
+        "label": "registers with"
+      },
+      {
+        "source": "random",
+        "target": "memory",
+        "label": "uses secure memory"
+      },
+      {
+        "source": "tools",
+        "target": "public-api",
+        "label": "uses library API"
+      },
+      {
+        "source": "tools",
+        "target": "mpi",
+        "label": "uses MPI"
+      },
+      {
+        "source": "tests",
+        "target": "public-api",
+        "label": "tests library API"
+      },
+      {
+        "source": "tests",
+        "target": "core",
+        "label": "uses internal API"
+      },
+      {
+        "source": "core",
+        "target": "compat",
+        "label": "uses"
+      },
+      {
+        "source": "build-system",
+        "target": "build-aux",
+        "label": "includes"
+      }
+    ],
+    "categories": [
+      {
+        "name": "api",
+        "color": "#4A90D9",
+        "description": "Public API surface, exported headers and symbols"
+      },
+      {
+        "name": "backend",
+        "color": "#7B68EE",
+        "description": "Core runtime, utilities, and server-side logic"
+      },
+      {
+        "name": "library",
+        "color": "#2ECC71",
+        "description": "Cryptographic algorithm implementations exposed to users"
+      },
+      {
+        "name": "internal",
+        "color": "#E67E22",
+        "description": "Internal helpers, platform-specific code, and optimization"
+      },
+      {
+        "name": "testing",
+        "color": "#E74C3C",
+        "description": "Test suites and test utilities"
+      },
+      {
+        "name": "infrastructure",
+        "color": "#95A5A6",
+        "description": "Build system, CI/CD, deployment, and configuration"
+      },
+      {
+        "name": "docs",
+        "color": "#F39C12",
+        "description": "Documentation and project metadata"
+      }
+    ],
+    "sections": [
+      {
+        "name": "Public Interface",
+        "nodeIds": [
+          "public-api"
+        ]
+      },
+      {
+        "name": "Core Runtime",
+        "nodeIds": [
+          "core",
+          "memory",
+          "hwfeatures",
+          "hmac256",
+          "compat"
+        ]
+      },
+      {
+        "name": "Symmetric Cryptography",
+        "nodeIds": [
+          "symmetric-ciphers",
+          "cipher-modes",
+          "cipher-common"
+        ]
+      },
+      {
+        "name": "Hash & MAC",
+        "nodeIds": [
+          "hash",
+          "mac",
+          "kdf"
+        ]
+      },
+      {
+        "name": "Asymmetric & Post-Quantum Cryptography",
+        "nodeIds": [
+          "pubkey",
+          "pqc"
+        ]
+      },
+      {
+        "name": "Multi-Precision Integers",
+        "nodeIds": [
+          "mpi",
+          "mpi-asm"
+        ]
+      },
+      {
+        "name": "Random Number Generation",
+        "nodeIds": [
+          "random",
+          "jitterentropy"
+        ]
+      },
+      {
+        "name": "Tools & Tests",
+        "nodeIds": [
+          "tools",
+          "tests"
+        ]
+      },
+      {
+        "name": "Build & Documentation",
+        "nodeIds": [
+          "build-system",
+          "build-aux",
+          "docs",
+          "changelogs"
+        ]
+      }
+    ],
+    "summary": "libgcrypt is a general-purpose cryptographic library organized around a core runtime (global init, FIPS mode, secure memory, hardware feature detection) that dispatches to pluggable algorithm modules. The cipher subsystem provides symmetric ciphers with extensive hardware-accelerated implementations (AES-NI, NEON, AVX2/512, POWER, RISC-V, s390x) and multiple modes of operation (GCM, CCM, OCB, XTS, etc.). Hash and MAC modules support all major algorithms with similar platform optimizations. Public-key cryptography builds on a multi-precision integer (MPI) library with assembly backends for 15+ architectures, supporting RSA, DSA, ECC (including EdDSA/ECDH), plus post-quantum algorithms (ML-KEM/Kyber, ML-DSA/Dilithium, Classic McEliece, NTRU Prime). The random subsystem provides CSPRNG and DRBG implementations fed by multiple entropy sources including jitter entropy. The library exposes a stable C API through carefully controlled symbol visibility and includes a comprehensive test suite, autotools build system, and Texinfo documentation."
+  },
+  "savedAt": "2026-05-26T02:12:27.154Z"
+}

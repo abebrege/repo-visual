@@ -1,0 +1,554 @@
+{
+  "name": "scaffcc",
+  "repoUrl": "https://github.com/epiqc/ScaffCC.git",
+  "dag": {
+    "nodes": [
+      {
+        "id": "quantum_algorithms",
+        "label": "Quantum Algorithms",
+        "category": "quantum",
+        "description": "Scaffold quantum algorithm implementations including Shor's, QFT, VQE, Ising Model, and other quantum computing benchmarks",
+        "files": [
+          "Algorithms/All_Gates_Example/all_gates.scaffold",
+          "Algorithms/Binary_Welded_Tree/binary_welded_tree.n100s100.scaffold",
+          "Algorithms/Boolean_Formula/boolean_formula.x2y2.scaffold",
+          "Algorithms/Cat_State/cat_state.n04.scaffold",
+          "Algorithms/Ground_State_Estimation/ground_state_estimation.h2.scaffold",
+          "Algorithms/Ground_State_Estimation/ground_state_estimation.m10.scaffold",
+          "Algorithms/Ising_Model/ising_model.n10.scaffold",
+          "Algorithms/Ising_Model/ising_model.n1000.scaffold",
+          "Algorithms/Ising_Model/ising_model.n500.scaffold",
+          "Algorithms/QFT/qft.n05.scaffold",
+          "Algorithms/RKQC_Testing/rkqc_test.n32.scaffold",
+          "Algorithms/SHA-1/sha1.n128.scaffold",
+          "Algorithms/Shors/Shors_15/shors.n3.scaffold",
+          "Algorithms/Shors/Shors_15/shors.n3.scaffassert",
+          "Algorithms/Shors/cADD/cADD.scaffold",
+          "Algorithms/Shors/cADD/cADD_test.scaffold",
+          "Algorithms/Shors/cADD/cADD_test.scaffassert",
+          "Algorithms/Shors/cMODADD/cMODADD.scaffold",
+          "Algorithms/Shors/cMODADD/cMODADD_test.scaffold",
+          "Algorithms/Shors/cMODADD/cMODADD_test.scaffassert",
+          "Algorithms/Shors/cMODMUL/cMODMUL.scaffold",
+          "Algorithms/Shors/cMODMUL/cMODMUL_test.scaffold",
+          "Algorithms/Shors/cMODMUL/cMODMUL_test.scaffassert",
+          "Algorithms/Shors/shors.n512.scaffold",
+          "Algorithms/Shors/look_up_tables.h",
+          "Algorithms/Shors/inline_info.txt",
+          "Algorithms/Square_Root/square_root.n10.scaffold",
+          "Algorithms/Square_Root/square_root.n4.scaffold",
+          "Algorithms/Square_Root/square_root.n4.scaffassert",
+          "Algorithms/Square_Root/README.txt",
+          "Algorithms/Triangle_Finding_Problem/triangle_finding_problem.n05.scaffold",
+          "Algorithms/Triangle_Finding_Problem/TFP_Oracle.scaffold",
+          "Algorithms/VQE/UCCSD_ansatz_4.scaffold",
+          "Algorithms/VQE/UCCSD_ansatz_6.scaffold",
+          "Algorithms/VQE/UCCSD_ansatz_8.scaffold",
+          "Algorithms/VQE/README.md"
+        ]
+      },
+      {
+        "id": "class_number",
+        "label": "Class Number Algorithm",
+        "category": "quantum",
+        "description": "Class Number quantum algorithm with supporting C modules for number theory computations",
+        "files": [
+          "Algorithms/Class_Number/class_number.n06.scaffold",
+          "Algorithms/Class_Number/cnum/cnum.scaffold",
+          "Algorithms/Class_Number/cnum/cnp1.c",
+          "Algorithms/Class_Number/cnum/cnp2.c",
+          "Algorithms/Class_Number/cnum/fjn.c",
+          "Algorithms/Class_Number/cnum/fn.c",
+          "Algorithms/Class_Number/cnum/fn.h",
+          "Algorithms/Class_Number/cnum/gcd.c",
+          "Algorithms/Class_Number/cnum/ghat.c",
+          "Algorithms/Class_Number/cnum/h.c",
+          "Algorithms/Class_Number/cnum/product.c",
+          "Algorithms/Class_Number/cnum/qft.c",
+          "Algorithms/Class_Number/cnum/rho.c",
+          "Algorithms/Class_Number/cnum/st_product.c",
+          "Algorithms/Class_Number/cnum/tau.c",
+          "Algorithms/Class_Number/cnum/xd.c"
+        ]
+      },
+      {
+        "id": "quantum_library",
+        "label": "Quantum Gate Library",
+        "category": "library",
+        "description": "Reusable quantum gate library modules including QFT, SWAP, controlled rotations",
+        "files": [
+          "Library/QFT/QFT.scaffold",
+          "Library/QFT/QFT_test.scaffold",
+          "Library/QFT/QFT_test.scaffassert",
+          "Library/SWAP/SWAP.scaffold",
+          "Library/cRz/cRz.scaffold",
+          "Library/cSWAP/cSWAP.scaffold",
+          "Library/ccRz/ccRz.scaffold"
+        ]
+      },
+      {
+        "id": "rotations",
+        "label": "Rotation Synthesis (gridsynth)",
+        "category": "quantum_tools",
+        "description": "Grid synthesis tool for quantum rotation gate decomposition",
+        "files": [
+          "Rotations/gridsynth/README.md"
+        ]
+      },
+      {
+        "id": "braidflash",
+        "label": "BraidFlash",
+        "category": "quantum_tools",
+        "description": "Braiding-based fault-tolerant quantum compilation tool for topological quantum computing",
+        "files": [
+          "braidflash/Makefile",
+          "braidflash/arrange.py",
+          "braidflash/braidflash.cpp",
+          "braidflash/config.cfg",
+          "braidflash/documentation/documentation.pdf",
+          "braidflash/documentation/documentation.tex",
+          "braidflash/parse_results.sh"
+        ]
+      },
+      {
+        "id": "clang_frontend",
+        "label": "Clang Frontend (Scaffold)",
+        "category": "compiler_frontend",
+        "description": "Modified Clang frontend for parsing Scaffold quantum programs, including lexer, parser, and semantic analysis",
+        "files": [
+          "clang/include/clang/Lex/*.h",
+          "clang/lib/Lex/*.cpp",
+          "clang/include/clang/Parse/*.h",
+          "clang/lib/Parse/*.cpp",
+          "clang/include/clang/Sema/*.h",
+          "clang/lib/Sema/*.cpp",
+          "clang/include/clang/Frontend/*.h",
+          "clang/lib/Frontend/*.cpp",
+          "clang/include/clang/FrontendTool/*.h",
+          "clang/lib/FrontendTool/*.cpp",
+          "clang/include/clang/Driver/*.h",
+          "clang/lib/Driver/*.cpp"
+        ]
+      },
+      {
+        "id": "clang_ast",
+        "label": "Clang AST",
+        "category": "compiler_frontend",
+        "description": "Abstract Syntax Tree representation and manipulation for the modified Clang/Scaffold compiler",
+        "files": [
+          "clang/include/clang/AST/*.h",
+          "clang/lib/AST/*.cpp",
+          "clang/lib/AST/Interp/*.cpp",
+          "clang/lib/AST/Interp/*.h"
+        ]
+      },
+      {
+        "id": "clang_codegen",
+        "label": "Clang CodeGen",
+        "category": "compiler_backend",
+        "description": "LLVM IR code generation from Clang AST, modified for Scaffold quantum program compilation",
+        "files": [
+          "clang/include/clang/CodeGen/*.h",
+          "clang/lib/CodeGen/*.cpp",
+          "clang/lib/CodeGen/*.h"
+        ]
+      },
+      {
+        "id": "clang_basic",
+        "label": "Clang Basic Infrastructure",
+        "category": "compiler_core",
+        "description": "Core compiler infrastructure: diagnostics, source management, target info, language options",
+        "files": [
+          "clang/include/clang/Basic/*.h",
+          "clang/include/clang/Basic/*.def",
+          "clang/include/clang/Basic/*.td",
+          "clang/lib/Basic/*.cpp",
+          "clang/lib/Basic/Targets/*.cpp",
+          "clang/lib/Basic/Targets/*.h"
+        ]
+      },
+      {
+        "id": "clang_analysis",
+        "label": "Clang Analysis & Static Analyzer",
+        "category": "compiler_analysis",
+        "description": "Program analysis framework and static analyzer including checkers, bug reporters, and path-sensitive analysis",
+        "files": [
+          "clang/include/clang/Analysis/*.h",
+          "clang/lib/Analysis/*.cpp",
+          "clang/include/clang/StaticAnalyzer/**/*.h",
+          "clang/lib/StaticAnalyzer/**/*.cpp"
+        ]
+      },
+      {
+        "id": "clang_serialization",
+        "label": "Clang Serialization",
+        "category": "compiler_core",
+        "description": "AST serialization/deserialization for precompiled headers and modules",
+        "files": [
+          "clang/include/clang/Serialization/*.h",
+          "clang/lib/Serialization/*.cpp"
+        ]
+      },
+      {
+        "id": "clang_tooling",
+        "label": "Clang Tooling",
+        "category": "compiler_tools",
+        "description": "Tooling infrastructure for building Clang-based tools, refactoring, and AST matchers",
+        "files": [
+          "clang/include/clang/Tooling/**/*.h",
+          "clang/lib/Tooling/**/*.cpp",
+          "clang/include/clang/ASTMatchers/*.h",
+          "clang/lib/ASTMatchers/*.cpp",
+          "clang/include/clang/Rewrite/**/*.h",
+          "clang/lib/Rewrite/*.cpp",
+          "clang/include/clang/Format/*.h",
+          "clang/lib/Format/*.cpp"
+        ]
+      },
+      {
+        "id": "clang_headers",
+        "label": "Clang Built-in Headers",
+        "category": "compiler_core",
+        "description": "Built-in compiler header files for target-specific intrinsics and standard library support",
+        "files": [
+          "clang/lib/Headers/*.h",
+          "clang/lib/Headers/cuda_wrappers/*",
+          "clang/lib/Headers/openmp_wrappers/*",
+          "clang/lib/Headers/ppc_wrappers/*"
+        ]
+      },
+      {
+        "id": "clang_c_api",
+        "label": "Clang C API (libclang)",
+        "category": "api",
+        "description": "C API bindings for Clang, including Python bindings for external tool integration",
+        "files": [
+          "clang/include/clang-c/*.h",
+          "clang/bindings/python/clang/*.py",
+          "clang/bindings/python/examples/cindex/*.py",
+          "clang/bindings/python/tests/**/*.py"
+        ]
+      },
+      {
+        "id": "clang_build",
+        "label": "Clang Build System",
+        "category": "infrastructure",
+        "description": "CMake build configuration, caches, and module definitions for the Clang compiler",
+        "files": [
+          "clang/CMakeLists.txt",
+          "clang/cmake/**/*.cmake",
+          "clang/include/CMakeLists.txt",
+          "clang/include/clang/CMakeLists.txt",
+          "clang/lib/CMakeLists.txt",
+          "clang/runtime/CMakeLists.txt",
+          "clang/include/clang/Config/config.h.cmake"
+        ]
+      },
+      {
+        "id": "clang_docs",
+        "label": "Clang Documentation",
+        "category": "docs",
+        "description": "Clang compiler documentation including user manuals, internals, and API references",
+        "files": [
+          "clang/docs/*.rst",
+          "clang/docs/conf.py",
+          "clang/docs/analyzer/**/*",
+          "clang/docs/CommandGuide/*.rst",
+          "clang/docs/tools/*.py",
+          "clang/README.txt",
+          "clang/INSTALL.txt",
+          "clang/LICENSE.TXT",
+          "clang/NOTES.txt"
+        ]
+      },
+      {
+        "id": "clang_tests",
+        "label": "Clang Tests",
+        "category": "testing",
+        "description": "Test suite for Clang compiler including ARCMT tests and input files",
+        "files": [
+          "clang/test/.clang-format",
+          "clang/test/ARCMT/**/*",
+          "clang/INPUTS/*"
+        ]
+      },
+      {
+        "id": "clang_examples",
+        "label": "Clang Examples",
+        "category": "docs",
+        "description": "Example Clang plugins and tools demonstrating the plugin API",
+        "files": [
+          "clang/examples/AnnotateFunctions/*",
+          "clang/examples/PrintFunctionNames/*",
+          "clang/examples/clang-interpreter/*",
+          "clang/examples/CMakeLists.txt"
+        ]
+      },
+      {
+        "id": "build_system",
+        "label": "ScaffCC Build System",
+        "category": "infrastructure",
+        "description": "Top-level build scripts and configuration for the ScaffCC quantum compiler framework",
+        "files": [
+          "Makefile",
+          "build.sh",
+          ".gitignore",
+          "changelog.txt"
+        ]
+      },
+      {
+        "id": "project_docs",
+        "label": "Project Documentation",
+        "category": "docs",
+        "description": "Top-level project documentation and license",
+        "files": [
+          "README.md",
+          "LICENSE"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "source": "quantum_algorithms",
+        "target": "quantum_library",
+        "label": "uses gate primitives"
+      },
+      {
+        "source": "quantum_algorithms",
+        "target": "clang_frontend",
+        "label": "compiled by"
+      },
+      {
+        "source": "class_number",
+        "target": "quantum_library",
+        "label": "uses gate primitives"
+      },
+      {
+        "source": "class_number",
+        "target": "clang_frontend",
+        "label": "compiled by"
+      },
+      {
+        "source": "quantum_library",
+        "target": "clang_frontend",
+        "label": "compiled by"
+      },
+      {
+        "source": "clang_frontend",
+        "target": "clang_ast",
+        "label": "builds and traverses"
+      },
+      {
+        "source": "clang_frontend",
+        "target": "clang_basic",
+        "label": "uses core infrastructure"
+      },
+      {
+        "source": "clang_ast",
+        "target": "clang_basic",
+        "label": "uses core types"
+      },
+      {
+        "source": "clang_codegen",
+        "target": "clang_ast",
+        "label": "reads AST"
+      },
+      {
+        "source": "clang_codegen",
+        "target": "clang_basic",
+        "label": "uses core infrastructure"
+      },
+      {
+        "source": "clang_analysis",
+        "target": "clang_ast",
+        "label": "analyzes AST"
+      },
+      {
+        "source": "clang_analysis",
+        "target": "clang_basic",
+        "label": "uses diagnostics"
+      },
+      {
+        "source": "clang_serialization",
+        "target": "clang_ast",
+        "label": "serializes AST"
+      },
+      {
+        "source": "clang_serialization",
+        "target": "clang_basic",
+        "label": "uses core types"
+      },
+      {
+        "source": "clang_tooling",
+        "target": "clang_ast",
+        "label": "matches and transforms AST"
+      },
+      {
+        "source": "clang_tooling",
+        "target": "clang_frontend",
+        "label": "drives compilation"
+      },
+      {
+        "source": "clang_tooling",
+        "target": "clang_basic",
+        "label": "uses core infrastructure"
+      },
+      {
+        "source": "clang_c_api",
+        "target": "clang_frontend",
+        "label": "wraps frontend"
+      },
+      {
+        "source": "clang_c_api",
+        "target": "clang_ast",
+        "label": "exposes AST"
+      },
+      {
+        "source": "clang_tests",
+        "target": "clang_frontend",
+        "label": "tests"
+      },
+      {
+        "source": "clang_examples",
+        "target": "clang_frontend",
+        "label": "uses plugin API"
+      },
+      {
+        "source": "clang_build",
+        "target": "clang_frontend",
+        "label": "builds"
+      },
+      {
+        "source": "clang_build",
+        "target": "clang_codegen",
+        "label": "builds"
+      },
+      {
+        "source": "build_system",
+        "target": "clang_build",
+        "label": "orchestrates build"
+      },
+      {
+        "source": "rotations",
+        "target": "clang_codegen",
+        "label": "post-processes gate decomposition"
+      },
+      {
+        "source": "braidflash",
+        "target": "clang_codegen",
+        "label": "consumes compiled output"
+      }
+    ],
+    "categories": [
+      {
+        "name": "quantum",
+        "color": "#7C4DFF",
+        "description": "Quantum algorithm implementations in Scaffold language"
+      },
+      {
+        "name": "library",
+        "color": "#00BFA5",
+        "description": "Reusable quantum gate library modules"
+      },
+      {
+        "name": "quantum_tools",
+        "color": "#FF6D00",
+        "description": "Quantum-specific compilation and optimization tools"
+      },
+      {
+        "name": "compiler_frontend",
+        "color": "#1E88E5",
+        "description": "Compiler frontend: lexing, parsing, semantic analysis, driver"
+      },
+      {
+        "name": "compiler_backend",
+        "color": "#43A047",
+        "description": "Compiler backend: LLVM IR code generation"
+      },
+      {
+        "name": "compiler_core",
+        "color": "#5E35B1",
+        "description": "Core compiler infrastructure and utilities"
+      },
+      {
+        "name": "compiler_analysis",
+        "color": "#F4511E",
+        "description": "Program analysis and static analysis framework"
+      },
+      {
+        "name": "compiler_tools",
+        "color": "#039BE5",
+        "description": "Tooling infrastructure for source-level tools"
+      },
+      {
+        "name": "api",
+        "color": "#00897B",
+        "description": "Public API surface and language bindings"
+      },
+      {
+        "name": "infrastructure",
+        "color": "#757575",
+        "description": "Build system, CI/CD, and configuration"
+      },
+      {
+        "name": "testing",
+        "color": "#FDD835",
+        "description": "Test suites and test utilities"
+      },
+      {
+        "name": "docs",
+        "color": "#8D6E63",
+        "description": "Documentation and examples"
+      }
+    ],
+    "sections": [
+      {
+        "name": "Quantum Programs & Libraries",
+        "nodeIds": [
+          "quantum_algorithms",
+          "class_number",
+          "quantum_library"
+        ]
+      },
+      {
+        "name": "Quantum Compilation Tools",
+        "nodeIds": [
+          "rotations",
+          "braidflash"
+        ]
+      },
+      {
+        "name": "Scaffold/Clang Compiler Core",
+        "nodeIds": [
+          "clang_basic",
+          "clang_ast",
+          "clang_frontend",
+          "clang_codegen",
+          "clang_serialization"
+        ]
+      },
+      {
+        "name": "Compiler Analysis & Tooling",
+        "nodeIds": [
+          "clang_analysis",
+          "clang_tooling",
+          "clang_c_api",
+          "clang_headers"
+        ]
+      },
+      {
+        "name": "Build, Test & Documentation",
+        "nodeIds": [
+          "build_system",
+          "clang_build",
+          "clang_tests",
+          "clang_examples",
+          "clang_docs",
+          "project_docs"
+        ]
+      }
+    ],
+    "summary": "ScaffCC is a quantum computing compiler framework built on a modified LLVM/Clang infrastructure. The architecture has three major layers: (1) a quantum programming layer consisting of Scaffold language algorithm implementations and a reusable quantum gate library, (2) a full compiler toolchain based on a heavily modified Clang frontend that parses Scaffold programs through a standard lexer→parser→AST→codegen pipeline generating LLVM IR, with all the supporting infrastructure of diagnostics, serialization, static analysis, and tooling, and (3) quantum-specific post-processing tools including gridsynth for rotation gate synthesis and BraidFlash for fault-tolerant topological quantum compilation. The compiler core follows classic compiler architecture with clear separation between basic infrastructure, AST representation, frontend parsing/semantic analysis, and backend code generation, while the quantum algorithms serve as both benchmarks and example programs for the framework."
+  },
+  "savedAt": "2026-05-26T01:54:52.505Z"
+}
